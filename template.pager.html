@@ -1,0 +1,15 @@
+﻿<nav>
+  <ul class="pagination">
+    <li ng-click="fn.prevPage()">
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li ng-repeat="item in fn.pages() track by $index"><a href="#" ng-click="fn.setPage($index + 1)">{{$index + 1}}</a></li>
+    <li ng-click="fn.nextPage()">
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

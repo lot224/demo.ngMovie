@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html ng-app="applicationModule">
+  <head>
+    <title>Demo Movies using angular</title>
+	  <meta charset="utf-8" />
+    <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/features/application/style.application.css" rel="stylesheet" />
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.angularjs.org/1.4.7/angular.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="assets/features/shared/service.dataset.js"></script>
+    <script src="assets/features/shared/service.storage.js"></script>
+    <script src="assets/features/shared/service.functions.js"></script>
+    <script src="assets/features/itunes/factory.itunes.js"></script>
+    <script src="assets/features/application/factory.favorites.js"></script>
+    <script src="assets/features/application/directive.pager.js"></script>
+    <script src="assets/features/application/config.application.js"></script>
+    <script src="assets/features/application/controller.application.js"></script>
+    <script src="assets/features/application/module.application.js"></script>
+  </head>
+  <body ng-controller="applicationController">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Angular/Bootstrap/jQuery Movie List</h3>
+      </div>
+      <div class="panel-body">
+        <div class="btn-group" ng-init="_section = 'top 50'">
+          <label class="btn btn-default" ng-click="_section = 'top 50'" ng-class="{'active':_section == 'top 50'}">top 50 movies</label>
+          <label class="btn btn-default" ng-click="_section = 'favorites'" ng-class="{'active':_section == 'favorites'}">My Favorites <span class="badge">{{fav.items().length}}</span></label>
+        </div>
+
+        <div ng-show="_section == 'top 50'">
+          <pager dataset="dataset"></pager>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td></td>
+                  <td ng-click="dataset.sort('title')">Title</td>
+                  <td ng-click="dataset.sort('director')">Director</td>
+                  <td ng-click="dataset.sort('price')">Price</td>
+                  <td ng-click="dataset.sort('rent')">Rent</td>
+                  <td ng-click="dataset.sort('release')">Release Date</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in dataset.view" ng-click="fn.setSelectedItem(item)">
+                  <td><img style="width:40px;" src="{{dataset.sorters.image(item)}}" /></td>
+                  <td>{{dataset.sorters.title(item)}}</td>
+                  <td>{{dataset.sorters.director(item)}}</td>
+                  <td>{{dataset.sorters.price(item)}}</td>
+                  <td>{{dataset.sorters.rent(item)}}</td>
+                  <td>{{dataset.sorters.release(item)}}</td>
+                  <td>
+                    <label class="btn btn-default" ng-click="fn.toggleFavorite($event, item)" ng-class="{'active':fn.isFavorite(item)}">
+                      <span class="glyphicon glyphicon-star"></span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <div ng-show="_section == 'favorites'">
+          <span class="thumbnail" ng-repeat="item in fav.items()" style="display:inline-block; margin:5px; min-width: 200px; padding: 10px;"  ng-click="fn.setSelectedItem(item)">
+            <img src="{{item['im:image'][2].label}}" alt="...">
+            <div class="caption" style="text-align:center;">
+              <h3>{{item['im:name'].label}}</h3>
+              <p><a href="#" class="btn btn-primary" role="button" ng-click="fn.toggleFavorite($event, item)">Remove</a></p>
+            </div>
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel panel-default" ng-show="selectedItem">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{selectedItem['im:name'].label}} - {{selectedItem['im:price'].label}}</h3>
+      </div>
+      <div class="panel-body">
+        <img style="float: left; padding-right: 20px;" src="{{selectedItem['im:image'][2].label}}" />
+        <span>{{selectedItem['summary'].label}}</span>
+      </div>
+    </div>
+
+  </body>
+</html>
