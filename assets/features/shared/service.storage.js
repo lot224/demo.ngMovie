@@ -9,8 +9,6 @@
   service.get = function (id) {
     if (!id) return service.getAll();
 
-    
-
     var value = storage ? storage.getItem(id) : dictionary[id];
 
 

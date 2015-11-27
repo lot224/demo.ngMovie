@@ -1,0 +1,15 @@
+{
+  "name": "demo.ngMovie",
+  "description": "A demo showing usage of factories, controllers, and directives",
+  "version": "0.1.0",
+  "author": "Dave Gardyasz",
+  "license": "MIT",
+  "homepage": "https://github.com/lot224/demo.ngMovie",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lot224/demo.ngMovie.git"
+  },
+  "engines": {
+    "node": ">= 4.1.1"
+  }
+}
