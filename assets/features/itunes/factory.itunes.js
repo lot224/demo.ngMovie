@@ -1,4 +1,12 @@
-﻿var iTunesFactory = ['$q', '$http', function ($q, $http) {
+﻿
+/**
+ * @ngdoc factory
+ * @name iTunesFactory
+ * @depends $q
+ * @depends $http
+ * @description Gets a collection of the top 50 movies from iTunes
+ */
+var iTunesFactory = ['$q', '$http', function ($q, $http) {
 
   var iTunesUrl = 'https://itunes.apple.com/us/rss/topmovies/limit=50/json'
 
@@ -6,8 +14,14 @@
 
   var factory = {};
 
+  /**
+   * @name iTunesFactory.movies
+   * @kind function
+   * @returns {promise}
+   * @description retreives the top 50 movies from apple.com's iTunes server.
+   */
   factory.movies = function () {
-    
+
     var d = $q.defer();
 
     if (movies === null) {
