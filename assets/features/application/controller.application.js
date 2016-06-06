@@ -1,13 +1,9 @@
 ﻿
 var applicationController = ['$scope', 'datasetService', 'iTunesFactory', 'favoritesFactory', function ($scope, dataset, iTunes, fav) {
 
-
   var berger = window.localStorage.getItem("berger");
-  console.log("berger", berger);
   berger = new Date().getTime();
   window.localStorage.setItem("berger", berger);
-  console.log("berger", berger);
-  
 
   $scope.fav = fav;
 
@@ -58,11 +54,10 @@ var applicationController = ['$scope', 'datasetService', 'iTunesFactory', 'favor
     isFavorite: function (item) {
       return fav.item(item) !== null;
     }
-  }
+  };
 
   iTunes.movies()
     .then(function (data) {
       ds.load(data);
     });
-
 }];

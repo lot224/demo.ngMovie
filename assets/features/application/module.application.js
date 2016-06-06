@@ -1,5 +1,6 @@
 ﻿angular.module("applicationModule", [])
   .controller("applicationController", applicationController)
+  .directive("img", imgDirective)
   .directive("pager", pagerDirective)
   .factory("iTunesFactory", iTunesFactory)
   .factory("favoritesFactory", favoritesFactory)

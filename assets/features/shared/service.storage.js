@@ -1,7 +1,5 @@
 ﻿var storageManager = function ($rootScope, storageType, storage) { // jshint ignore:line
 
-  console.log("storageManager", storageType, storage, window);
-
   var dictionary = [];
 
   var service = {};
@@ -33,19 +31,15 @@
   service.set = function (key, value) {
     if (typeof value === undefined) {
       if (storage) {
-        console.log("using storage: undefined");
         storage.setItem(key, undefined);
       } else {
-        console.log("using dictionary: undefined");
         dictionary[key] = undefined;
       }
     } else {
       var obj = JSON.stringify(value);
       if (storage) {
-        console.log("using storage: value");
         storage.setItem(key, obj);
       } else {
-        console.log("using dictionary: value");
         dictionary[key] = obj;
       }
     }
